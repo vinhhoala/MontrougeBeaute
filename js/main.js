@@ -11,6 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections   = document.querySelectorAll('section[id]');
 
   /* -------------------------------------------------------
+     Promo bar: dismiss on close button
+  ------------------------------------------------------- */
+  const promoBar   = document.getElementById('promo-bar');
+  const promoClose = document.getElementById('promo-close');
+
+  if (promoClose && promoBar) {
+    promoClose.addEventListener('click', () => {
+      promoBar.classList.add('promo-bar--hidden');
+    });
+  }
+
+  /* -------------------------------------------------------
      Header: shrink on scroll
   ------------------------------------------------------- */
   const onScroll = () => {

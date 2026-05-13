@@ -258,7 +258,7 @@ em { font-style: italic; }
 
 .logo__name {
   font-family: var(--ff-serif);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: var(--fw-semi);
   font-style: italic;
   color: var(--clr-white);
@@ -266,18 +266,6 @@ em { font-style: italic; }
 }
 
 .header--scrolled .logo__name { color: var(--clr-dark); }
-
-.logo__sub {
-  font-family: var(--ff-sans);
-  font-size: 0.625rem;
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.7);
-  transition: color var(--transition);
-}
-
-.header--scrolled .logo__sub { color: var(--clr-muted); }
 
 /* Nav */
 .nav__list {
@@ -1059,17 +1047,10 @@ em { font-style: italic; }
 
 .footer__name {
   font-family: var(--ff-serif);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-style: italic;
   font-weight: var(--fw-semi);
   color: var(--clr-white);
-}
-
-.footer__sub {
-  font-size: 0.625rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.4);
 }
 
 .footer__copy {

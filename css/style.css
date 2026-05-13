@@ -904,69 +904,122 @@ em { font-style: italic; }
 .galerie__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
-@media (min-width: 640px) {
-  .galerie__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+@media (min-width: 540px) {
+  .galerie__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 900px) {
-  .galerie__grid {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 260px);
-  }
+  .galerie__grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+}
 
-  .galerie__item--1 { grid-column: 1 / 2; grid-row: 1 / 3; }
-  .galerie__item--2 { grid-column: 2 / 3; grid-row: 1 / 2; }
-  .galerie__item--3 { grid-column: 3 / 4; grid-row: 1 / 2; }
-  .galerie__item--4 { grid-column: 2 / 3; grid-row: 2 / 3; }
-  .galerie__item--5 { grid-column: 3 / 4; grid-row: 2 / 3; }
-  .galerie__item--6 { display: none; }
+@media (min-width: 1200px) {
+  .galerie__grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 .galerie__item {
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
   position: relative;
   aspect-ratio: 1;
   background: var(--clr-bg-alt);
-}
-
-@media (min-width: 900px) {
-  .galerie__item { aspect-ratio: unset; }
+  cursor: pointer;
 }
 
 .galerie__item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.45s ease;
+  display: block;
 }
 
-.galerie__item:hover img { transform: scale(1.04); }
-
-.galerie__placeholder {
-  background: linear-gradient(135deg, var(--clr-primary-light) 0%, var(--clr-bg-alt) 100%);
-  border: 1px dashed var(--clr-border);
-}
-
-.galerie__placeholder-inner {
+.galerie__item::after {
+  content: '';
   position: absolute;
   inset: 0;
+  background: rgba(28,26,24,0);
+  transition: background 0.3s ease;
+}
+
+.galerie__item:hover img { transform: scale(1.06); }
+.galerie__item:hover::after { background: rgba(28,26,24,.15); }
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10,8,6,.94);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  font-weight: var(--fw-semi);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--clr-primary);
-  opacity: 0.7;
+  padding: var(--space-5);
+  animation: lb-in 0.2s ease;
 }
+
+.lightbox[hidden] { display: none; }
+
+@keyframes lb-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 24px 80px rgba(0,0,0,.6);
+  animation: lb-scale 0.25s ease;
+}
+
+@keyframes lb-scale {
+  from { transform: scale(0.94); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.lightbox__close {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  color: rgba(255,255,255,.8);
+  background: rgba(255,255,255,.1);
+  border-radius: var(--radius-full);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+
+.lightbox__close:hover { background: rgba(255,255,255,.2); color: var(--clr-white); }
+
+.lightbox__prev,
+.lightbox__next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,.75);
+  background: rgba(255,255,255,.1);
+  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition);
+}
+
+.lightbox__prev { left: var(--space-4); }
+.lightbox__next { right: var(--space-4); }
+.lightbox__prev:hover,
+.lightbox__next:hover { background: rgba(255,255,255,.2); color: var(--clr-white); }
 
 .galerie__footer {
   margin-top: var(--space-7);

@@ -129,6 +129,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -------------------------------------------------------
+     Lightbox
+  ------------------------------------------------------- */
+  const lightbox     = document.getElementById('lightbox');
+  const lightboxImg  = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const galleryItems = [...document.querySelectorAll('.galerie__item img')];
+  let currentIndex   = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = galleryItems[index].src;
+    lightboxImg.alt = galleryItems[index].alt;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    lightboxImg.src = galleryItems[currentIndex].src;
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    lightboxImg.src = galleryItems[currentIndex].src;
+  }
+
+  galleryItems.forEach((img, i) => {
+    img.parentElement.addEventListener('click', () => openLightbox(i));
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxPrev)  lightboxPrev.addEventListener('click', showPrev);
+  if (lightboxNext)  lightboxNext.addEventListener('click', showNext);
+
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.hidden) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+  /* -------------------------------------------------------
      Smooth scroll polyfill for browsers that need it
   ------------------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

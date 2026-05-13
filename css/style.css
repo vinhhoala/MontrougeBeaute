@@ -882,6 +882,24 @@ em { font-style: italic; }
   flex-shrink: 0;
 }
 
+.pricing-block--wide {
+  grid-column: span 2;
+}
+
+@media (max-width: 639px) {
+  .pricing-block--wide { grid-column: span 1; }
+}
+
+.tarifs__note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--clr-muted);
+  text-align: center;
+  margin-top: var(--space-6);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
 .tarifs__cta {
   margin-top: var(--space-9);
   text-align: center;

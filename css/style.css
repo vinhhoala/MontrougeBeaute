@@ -533,7 +533,11 @@ em { font-style: italic; }
 }
 
 @media (min-width: 768px) {
-  .services__grid { grid-template-columns: repeat(3, 1fr); }
+  .services__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .services__grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 .service-card {
